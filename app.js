@@ -7,4 +7,4 @@ app.config(function($sceDelegateProvider) {
     ]);
 });
 
-const key = 'AIzaSyDQ9gKgEow8QdNmQ_0WPlaVbydjpQzMxEI';
+const key = '';
