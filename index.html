@@ -25,7 +25,24 @@
     </header>
 
     <div class="container">
-        
+        <section class="row" ng-controller="searchCtrl">
+ 
+
+        </section>
+
+
+        <section class="row" ng-controller="videoCtrl">
+            <div class="col-12">
+                <h2>Top Dachshund Videos</h2>
+
+                <div class="row">
+                    <a class="col-3" ng-repeat="video in videos">
+                        <img ng-src="{{ video.snippet.thumbnails.medium.url }}"/>
+                        {{ video.snippet.title }}
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
