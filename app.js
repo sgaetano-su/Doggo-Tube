@@ -11,7 +11,8 @@ const key = 'AIzaSyDxmtiD7-a4qjC370LGytXEWJ8U2qJN2OY';
 
 
 app.controller('searchCtrl', function($scope, $http) {
-    $scope.search_query = '';
+    $scope.query = "";
+    $scope.searchvideos = [];
 
     $scope.search_videos = function() {
         $http({
@@ -21,13 +22,13 @@ app.controller('searchCtrl', function($scope, $http) {
                 key: key,
                 part:'snippet',
                 maxResults:8,
-                q: $scope.search_query + ' dog', 
+                q: $scope.query + ' dog', 
                 type:'video'
             }
         }).then(function(response) {
             console.log(response.data.items);
-    
             $scope.videos = response.data.items;
+            $scope.query = null;
         }, function(error){
             console.log(error);
         });
@@ -36,9 +37,7 @@ app.controller('searchCtrl', function($scope, $http) {
 });
 
 
-// playlist in playlists
-// scope.corgi
-// scope.husky
+
 
 app.controller('videoCtrl', function($scope, $http) {
     $scope.videos = []; 
@@ -51,12 +50,64 @@ app.controller('videoCtrl', function($scope, $http) {
             part:'snippet',
             maxResults:8,
             q:'dachshund', 
-            type:'video'
+            type:'video',
+            videoID:'',
         }
     }).then(function(response) {
         console.log(response.data.items);
 
         $scope.videos = response.data.items;
+    }, function(error){
+        console.log(error);
+    });
+}); 
+
+
+
+
+app.controller('playlistsCtrl', function($scope, $http) {
+    $scope.playlists = []; 
+
+    $http({
+        url:'https://www.googleapis.com/youtube/v3/search',
+        method:'GET',
+        params: {
+            key: key,
+            part:'snippet',
+            maxResults:8,
+            q:'corgi', 
+            type:'playlist'
+        }
+    }).then(function(response) {
+        console.log(response.data.items);
+
+        $scope.playlists = response.data.items;
+    }, function(error){
+        console.log(error);
+    });
+}); 
+
+
+
+
+app.controller('channelsCtrl', function($scope, $http) {
+    $scope.channels = []; 
+
+    $http({
+        url:'https://www.googleapis.com/youtube/v3/search',
+        method:'GET',
+        params: {
+            key: key,
+            part:'snippet',
+            maxResults:8,
+            q:'husky', 
+            type:'channel'
+
+        }
+    }).then(function(response) {
+        console.log(response.data.items);
+
+        $scope.channels = response.data.items;
     }, function(error){
         console.log(error);
     });

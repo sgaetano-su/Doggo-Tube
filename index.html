@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DoggoTube</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
@@ -26,8 +26,21 @@
 
     <div class="container">
         <section class="row" ng-controller="searchCtrl">
- 
+            <div class="col-12">
+                <h2>Search DoggoTube</h2>
 
+                <form ng-submit="search_videos()">
+                    <div class="form-group">
+                        <input type="text" ng-model="query" class="form-control" value="Submit" placeholder="Search">
+                    </div>
+                </form>
+                    <div class="row"  ng-show="videos != null">
+                        <a class="col-3" ng-repeat="video in videos" href="https://www.youtube.com/watch?v={{video.id.videoId}}" target="_blank">
+                            <img ng-src="{{ video.snippet.thumbnails.medium.url }}"/>
+                            {{ video.snippet.title }}
+                        </a>
+                    </div>
+            </div>
         </section>
 
 
@@ -36,13 +49,40 @@
                 <h2>Top Dachshund Videos</h2>
 
                 <div class="row">
-                    <a class="col-3" ng-repeat="video in videos">
+                    <a class="col-3" ng-repeat="video in videos" href="https://www.youtube.com/watch?v={{video.id.videoId}}">
                         <img ng-src="{{ video.snippet.thumbnails.medium.url }}"/>
                         {{ video.snippet.title }}
                     </a>
                 </div>
             </div>
         </section>
+
+        <section class="row" ng-controller="playlistsCtrl">
+                <div class="col-12">
+                    <h2>Corgi Playlists</h2>
+    
+                    <div class="row">
+                        <a class="col-3" ng-repeat="playlist in playlists" href="https://www.youtube.com/playlist?list={{playlist.id.playlistId}}">
+                            <img ng-src="{{ playlist.snippet.thumbnails.medium.url }}"/>
+                            {{ playlist.snippet.title }}
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        <section class="row" ng-controller="channelsCtrl" href=>
+                <div class="col-12">
+                    <h2>Husky Channels</h2>
+    
+                    <div class="row">
+                        <a class="col-3" ng-repeat="channel in channels" href="https://www.youtube.com/channel/{{channel.id.channelId}}">
+                            <img ng-src="{{ channel.snippet.thumbnails.medium.url }}"/>
+                            {{ channel.snippet.title }}
+                        </a>
+                    </div>
+                </div>
+        </section>
+        
     </div>
 </body>
 </html>
